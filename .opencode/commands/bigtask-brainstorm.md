@@ -1,6 +1,5 @@
 ---
-description: Task brainstorming phase - explore requirements, solutions, and tech choices before bigtask-plan
-subtask: true
+description: Task brainstorming phase - explore requirements, solutions, and tech choices
 ---
 
 # Bigtask Brainstorm Command
@@ -98,11 +97,13 @@ Create a `tasks/$PROJECT_NAME/brainstorm.md` file with the following structure:
 ## Requirements Exploration
 
 ### Key Questions
+
 - [Question 1]
 - [Question 2]
 - ...
 
 ### User Scenarios
+
 - [Scenario 1]
 - [Scenario 2]
 - ...
@@ -110,12 +111,14 @@ Create a `tasks/$PROJECT_NAME/brainstorm.md` file with the following structure:
 ## Solution Options
 
 ### Option 1: [Name]
+
 - **Description**: [What it is]
 - **Pros**: [Advantages]
 - **Cons**: [Disadvantages]
 - **Best For**: [Use cases]
 
 ### Option 2: [Name]
+
 - [Same structure]
 
 [Continue with more options...]
@@ -123,6 +126,7 @@ Create a `tasks/$PROJECT_NAME/brainstorm.md` file with the following structure:
 ## Technology Stack
 
 ### Recommended Stack
+
 - **Frontend**: [Option]
 - **Backend**: [Option]
 - **Database**: [Option]
@@ -130,19 +134,23 @@ Create a `tasks/$PROJECT_NAME/brainstorm.md` file with the following structure:
 - **Other Tools**: [List]
 
 ### Alternative Stacks
+
 - [Alternative 1]
 - [Alternative 2]
 
 ## Risks and Open Questions
 
 ### High Priority
+
 - [Risk/Question 1]
 - [Risk/Question 2]
 
 ### Medium Priority
+
 - [Risk/Question 3]
 
 ### To Investigate Later
+
 - [Items to explore in detail during task planning]
 
 ## Next Steps
@@ -153,6 +161,21 @@ Use this brainstorming output as input context for the task planning phase.
 ```
 
 Output the brainstorming notes and explain the reasoning behind each exploration area.
+
+## File Modification Restriction
+
+DURING the entire brainstorming execution, you MUST only modify the following file:
+
+- `tasks/$PROJECT_NAME/brainstorm.md`
+
+DO NOT modify any other files, including:
+
+- No code files
+- No configuration files
+- No other markdown files
+- No task plan files
+
+If you need to reference other files, read them but DO NOT modify them.
 
 ## Final Confirmation
 
