@@ -1,5 +1,5 @@
 ---
-description: Execute a specific subtask by ID, or check status and sequentially execute plan
+description: Execute a specific subtask by ID, or sequentially execute plan
 ---
 
 # Bigtask Execute Command
@@ -10,8 +10,8 @@ IF $ARGUMENTS is empty:
 OUTPUT "Error: Missing required arguments."
 OUTPUT "Usage: /bigtask-execute <project-name> or /bigtask-execute <project-name>/<task-id>"
 OUTPUT "Examples:"
-OUTPUT "  - /bigtask-execute project-a (check status and sequentially execute)"
-OUTPUT "  - /bigtask-execute project-a/task-1 (execute specific task)"
+OUTPUT " - /bigtask-execute project-a (check status and sequentially execute)"
+OUTPUT " - /bigtask-execute project-a/task-1 (execute specific task)"
 STOP
 
 ## Check Execution Mode
@@ -50,8 +50,8 @@ The format is: `/bigtask-execute project-name/task-id` (e.g., `/bigtask-execute 
 
 1. First, read the `tasks/$PROJECT_NAME/task_plan.md` file to understand all tasks
 2. Find the task with ID: $TASK_ID
-3. Check for any input files that this task depends on (from previous task outputs in `tasks/$PROJECT_NAME/outputs/`)
-4. Execute the task and create output files in `tasks/$PROJECT_NAME/outputs/`
+3. Check for any input files that this task depends on (from previous task outputs)
+4. Execute the task - output files are saved to appropriate locations based on task requirements
 
 The task plan format is:
 
@@ -85,9 +85,9 @@ The format is: `/bigtask-execute project-name` (e.g., `/bigtask-execute project-
 1. First, read the `tasks/$PROJECT_NAME/task_plan.md` file to understand all tasks
 2. Read all existing state files (`tasks/$PROJECT_NAME/*-state.json`) to determine completed tasks
 3. Find the next pending task that has all dependencies satisfied
-4. Execute that task and create output files in `tasks/$PROJECT_NAME/outputs/`
+4. Execute the task - output files are saved to appropriate locations based on task requirements
 5. Create the state file for the executed task
-6. OUTPUT the current status and ask user whether to continue
+6. Output execution result and continue to next task automatically
 
 ### Execution Flow
 
@@ -99,7 +99,7 @@ The format is: `/bigtask-execute project-name` (e.g., `/bigtask-execute project-
    - All dependencies are completed
 4. Execute the task
 5. CREATE OR UPDATE state file with status "completed" or "failed"
-6. OUTPUT status and ask: "Continue with next task? (Y/N)"
+6. Output execution result and continue to next task automatically
 ```
 
 ### MANDATORY: State File Update
@@ -109,18 +109,18 @@ For EACH task execution, you MUST create/update the state file immediately:
 **File Path**: `tasks/$PROJECT_NAME/<task-id>-state.json`
 
 **Format**:
+
 ```json
 {
   "taskId": "task-1",
   "status": "completed",
-  "outputFiles": [
-    "tasks/$PROJECT_NAME/outputs/filename.ext"
-  ],
+  "outputFiles": ["path/to/file.ext"],
   "timestamp": "2024-01-01T00:00:00Z"
 }
 ```
 
 **Rules**:
+
 - Create new state file if it doesn't exist
 - Update existing state file with new status
 - ALWAYS set status to "completed" or "failed" (never "pending")
@@ -131,7 +131,7 @@ DO NOT proceed to next task until state file is created/updated.
 
 ### Status Output Format
 
-After each task execution, OUTPUT:
+After each task execution, automatically output:
 
 ```
 ────────────────────────────────────────
@@ -143,10 +143,8 @@ Pending: [n] tasks remaining
 
 Next Task: [task-id] - [task description]
 ────────────────────────────────────────
-
-Continue executing next task? (Y/N)
 ```
 
-Wait for user confirmation before executing the next task. DO NOT auto-continue.
+Continue to next task automatically, without asking for confirmation.
 
 Report the execution status after each task.
