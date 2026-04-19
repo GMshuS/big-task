@@ -27,6 +27,15 @@ SET $MODE = "sequential"
 
 ## Execution
 
+## Load Related Skills
+
+Before executing the task:
+
+1. Analyze task requirements to identify relevant skill categories (e.g., coding standards, testing, security, documentation)
+2. Search for available skills in project skills directory
+3. Automatically load related skills using the Skill tool
+4. Apply skill guidelines during task execution
+
 ## Clarification Guidelines
 
 During task execution, if you encounter any of the following, ASK THE USER for clarification:
